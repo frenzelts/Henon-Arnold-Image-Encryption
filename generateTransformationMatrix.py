@@ -1,13 +1,11 @@
-# from PIL import Image
-import matplotlib.pyplot as plt
 import numpy as np
 import cv2
 
 def generateHenonMap(image_size):
     x = 0.293201174303193
     y = 0.293201174303193
-    [w, h, d] = image_size
-    sequence_size = w * h * 8
+    [row, col, dim] = image_size
+    sequence_size = row * col * 8
     bit_sequence = [] #array contains 8 bits
     byte_array = []
     for i in range(sequence_size):
@@ -40,8 +38,11 @@ def generateHenonMap(image_size):
                 byte_array = [decimal]
             bit_sequence = []
     byte_array = np.asarray(byte_array)
-    henon_map = np.reshape(byte_array, [w, h])
+    henon_map = np.reshape(byte_array, [row, col])
     return henon_map
+
+def generateArnoldMap(image_size):
+    
 
 def dec(bitSequence):
     decimal = 0
