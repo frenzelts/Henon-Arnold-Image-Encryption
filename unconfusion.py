@@ -7,7 +7,7 @@ def pixelManipulation(image_matrix, image_size):
     print("Image size:",image_size)
 
     #Generate Arnold cat map
-    arnold_map = gtm.generateArnoldMap(image_matrix, image_size)
+    arnold_map = gtm.reconstructArnoldMap(image_matrix, image_size)
     print("Arnold map size: ", arnold_map.shape)
 
     return arnold_map

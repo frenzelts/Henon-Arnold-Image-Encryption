@@ -22,11 +22,12 @@ for x in glob(os.path.join(base_skin_dir, 'images', '*.jpg')):
     
     #begin confusion
     confused_img = con.pixelManipulation(image_matrix, image_size)
+    path = os.path.join('..', 'Source Code', 'images', 'confused')
+    newFilePath = path+"\\"+filename.split('.')[0]+".png"
+    cv2.imwrite(newFilePath, confused_img)
 
     #begin diffusion
-    diffused_img = dif.pixelManipulation(image_matrix, image_size)
-
-    #Save the output
-    path = os.path.join('..', 'Source Code', 'images', 'diffused')
+    diffused_img = dif.pixelManipulation(confused_img, confused_img.shape)
+    path = os.path.join('..', 'Source Code', 'images', 'encrypted')
     newFilePath = path+"\\"+filename.split('.')[0]+".png"
     cv2.imwrite(newFilePath, diffused_img)
