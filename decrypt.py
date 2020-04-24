@@ -25,9 +25,12 @@ for x in glob(os.path.join(base_skin_dir, 'images', 'encrypted', '*.png')):
 
     #begin unconfusion
     unconfused_img = unc.pixelManipulation(undiffused_img, undiffused_img.shape)
+    path = os.path.join('..', 'Source Code', 'images', 'unconfused')
+    newFilePath = path+"\\"+filename.split('.')[0]+".png"
+    cv2.imwrite(newFilePath, unconfused_img)
 
     #crop border
-    image_matrix = res.cropBorder(unconfused_img, unconfused_img.shape)
+    decrypted_image = res.cropBorder(unconfused_img, unconfused_img.shape)
     path = os.path.join('..', 'Source Code', 'images', 'decrypted')
     newFilePath = path+"\\"+filename.split('.')[0]+".png"
-    cv2.imwrite(newFilePath, image_matrix)
+    cv2.imwrite(newFilePath, decrypted_image)
