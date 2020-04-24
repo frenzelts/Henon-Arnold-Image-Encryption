@@ -48,7 +48,7 @@ def generateArnoldMap(image_matrix, image_size):
     iter = 2
     M = np.array(([1,p],[q,p*q+1]))
 
-    arnold_map = np.zeros([N,N,3], np.uint8)
+    arnold_map = np.zeros([N,N,4], np.uint8)
     for i in range(iter):
         for y in range(N):
             for x in range(N):
@@ -64,7 +64,7 @@ def reconstructArnoldMap(image_matrix, image_size):
     iter = 2
     M = np.array(([1,p],[q,p*q+1]))
 
-    arnold_map = np.zeros([N,N,3], np.uint8)
+    arnold_map = np.zeros([N,N,4], np.uint8)
     for i in range(iter):
         for y in range(N):
             for x in range(N):

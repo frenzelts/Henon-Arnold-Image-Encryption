@@ -19,6 +19,9 @@ for x in glob(os.path.join(base_skin_dir, 'images', '*.jpg')):
     #reshape the image into square
     image_matrix = res.resize(image_matrix, image_size)
     image_size = image_matrix.shape
+    path = os.path.join('..', 'Source Code', 'images', 'resized')
+    newFilePath = path+"\\"+filename.split('.')[0]+".png"
+    cv2.imwrite(newFilePath, image_matrix)
     
     #begin confusion
     confused_img = con.pixelManipulation(image_matrix, image_size)
@@ -26,7 +29,7 @@ for x in glob(os.path.join(base_skin_dir, 'images', '*.jpg')):
     newFilePath = path+"\\"+filename.split('.')[0]+".png"
     cv2.imwrite(newFilePath, confused_img)
 
-    #begin diffusion
+    # #begin diffusion
     diffused_img = dif.pixelManipulation(confused_img, confused_img.shape)
     path = os.path.join('..', 'Source Code', 'images', 'encrypted')
     newFilePath = path+"\\"+filename.split('.')[0]+".png"

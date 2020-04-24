@@ -8,6 +8,8 @@ def pixelManipulation(image_matrix, image_size):
     [row, col, dim] = image_size
     print("Image size:",image_size)
 
+    alpha = image_matrix[:,:,3]
+
     #Generate Henon map using the image dimension
     henon_map = gtm.generateHenonMap(image_size)
     print("Henon map size: ", henon_map.shape)
@@ -32,6 +34,6 @@ def pixelManipulation(image_matrix, image_size):
     resultant_matrix_b = np.reshape(resultant_matrix[0], [row,col])
     resultant_matrix_g = np.reshape(resultant_matrix[1], [row,col])
     resultant_matrix_r = np.reshape(resultant_matrix[2], [row,col])
-    resultant_matrix = np.dstack((resultant_matrix_b, resultant_matrix_g, resultant_matrix_r))
+    resultant_matrix = np.dstack((resultant_matrix_b, resultant_matrix_g, resultant_matrix_r, alpha))
 
     return resultant_matrix
