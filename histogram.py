@@ -12,5 +12,6 @@ def generateHistogram(img, flag):
         else:
             histr = cv2.calcHist([img],[i],None,[256],[0,256])
         plt.plot(histr,color = col)
+        plt.title('Histogram Citra '+flag)
         plt.xlim([0,256])
     return fig

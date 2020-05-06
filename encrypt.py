@@ -6,10 +6,9 @@ import confusion as con
 import resize as res
 import cv2
 
-base_skin_dir = os.path.join('..', 'Source Code')
-for x in glob(os.path.join(base_skin_dir, 'images', '*.jpg')):
-    filepath = os.path.abspath(x) #specific path of image
-    filename = os.path.basename(x) #image file name
+def encrypt(filepath, destination_path):
+    filepath = os.path.abspath(filepath) #specific path of image
+    filename = os.path.basename(filepath) #image file name
     print(filename)
     
     #Get image matrix and its dimension
@@ -31,6 +30,6 @@ for x in glob(os.path.join(base_skin_dir, 'images', '*.jpg')):
 
     # #begin diffusion
     diffused_img = dif.pixelManipulation(confused_img, confused_img.shape)
-    path = os.path.join('..', 'Source Code', 'images', 'encrypted')
-    newFilePath = path+"\\"+filename.split('.')[0]+".png"
+    # path = os.path.join('..', 'Source Code', 'images', 'encrypted')
+    newFilePath = destination_path+"\\"+filename.split('.')[0]+".png"
     cv2.imwrite(newFilePath, diffused_img)
