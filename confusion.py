@@ -2,12 +2,11 @@ import generateTransformationMatrix as gtm
 import numpy as np
 import cv2
 
-def pixelManipulation(image_matrix, image_size):
-    [row, col, dim] = image_size
-    print("Image size:",image_size)
+def pixelManipulation(image):
+    [row, col, dim] = image.dimension
 
     #Generate Arnold cat map
-    arnold_map = gtm.generateArnoldMap(image_matrix, image_size)
+    arnold_map = gtm.generateArnoldMap(image)
     print("Arnold map size: ", arnold_map.shape)
 
     return arnold_map

@@ -1,35 +1,23 @@
 import os
-from glob import glob
 import diffusion as dif
 from PIL import ImageTk, Image
 import confusion as con
 import resize as res
 import cv2
+import Image as i
 
 def encrypt(filepath, destination_path):
-    filepath = os.path.abspath(filepath) #specific path of image
-    filename = os.path.basename(filepath) #image file name
-    print(filename)
-    
-    #Get image matrix and its dimension
-    image_matrix = cv2.imread(filepath)
-    image_size = image_matrix.shape
+    im_original = i.Image(filepath, i.Type.ORIGINAL, cv2.imread(filepath))
+    print(im_original.filename)
 
     #reshape the image into square
-    image_matrix = res.resize(image_matrix, image_size)
-    image_size = image_matrix.shape
-    path = os.path.join('..', 'Source Code', 'images', 'resized')
-    newFilePath = path+"\\"+filename.split('.')[0]+".png"
-    cv2.imwrite(newFilePath, image_matrix)
+    im_reshaped = i.Image("E:\\KULIAH\\Skripsi\\Source Code\\images\\resized\\"+im_original.filename.split('.')[0]+".png", i.Type.RESHAPED, res.resize(im_original))
+    cv2.imwrite(im_reshaped.filepath, im_reshaped.matrix)
     
     #begin confusion
-    confused_img = con.pixelManipulation(image_matrix, image_size)
-    path = os.path.join('..', 'Source Code', 'images', 'confused')
-    newFilePath = path+"\\"+filename.split('.')[0]+".png"
-    cv2.imwrite(newFilePath, confused_img)
+    im_confused = i.Image("E:\\KULIAH\\Skripsi\\Source Code\\images\\confused\\"+im_original.filename.split('.')[0]+".png", i.Type.CONFUSED, con.pixelManipulation(im_reshaped))
+    cv2.imwrite(im_confused.filepath, im_confused.matrix)
 
     # #begin diffusion
-    diffused_img = dif.pixelManipulation(confused_img, confused_img.shape)
-    # path = os.path.join('..', 'Source Code', 'images', 'encrypted')
-    newFilePath = destination_path+"\\"+filename.split('.')[0]+".png"
-    cv2.imwrite(newFilePath, diffused_img)
+    im_diffused = i.Image(destination_path+"\\"+im_original.filename.split('.')[0]+".png", i.Type.ENCRYPTED, dif.pixelManipulation(im_confused))
+    cv2.imwrite(im_diffused.filepath, im_diffused.matrix)

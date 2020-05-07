@@ -41,8 +41,8 @@ def generateHenonMap(image_size):
     henon_map = np.reshape(byte_array, [row, col])
     return henon_map
 
-def generateArnoldMap(image_matrix, image_size):
-    N = image_size[0]
+def generateArnoldMap(image):
+    N = image.dimension[0]
     p = 20
     q = 10
     iter = 2
@@ -54,11 +54,11 @@ def generateArnoldMap(image_matrix, image_size):
             for x in range(N):
                 pixel_pos = np.array(([x],[y]))
                 [x1, y1] = np.mod(np.dot(M,pixel_pos),N)
-                arnold_map[x1,y1] = image_matrix[x,y]
+                arnold_map[x1,y1] = image.matrix[x,y]
     return arnold_map
 
-def reconstructArnoldMap(image_matrix, image_size):
-    N = image_size[0]
+def reconstructArnoldMap(image):
+    N = image.dimension[0]
     p = 20
     q = 10
     iter = 2
@@ -70,7 +70,7 @@ def reconstructArnoldMap(image_matrix, image_size):
             for x in range(N):
                 pixel_pos = np.array(([x],[y]))
                 [x1, y1] = np.mod(np.dot(M,pixel_pos),N)
-                arnold_map[x,y] = image_matrix[x1,y1]
+                arnold_map[x,y] = image.matrix[x1,y1]
     return arnold_map
 
 def dec(bitSequence):

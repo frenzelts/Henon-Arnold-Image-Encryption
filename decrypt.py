@@ -1,36 +1,24 @@
 import os
-from glob import glob
 import diffusion as dif
 from PIL import ImageTk, Image
 import confusion as con
 import unconfusion as unc
 import resize as res
 import cv2
+import Image as i
 
-base_skin_dir = os.path.join('..', 'Source Code')
-for x in glob(os.path.join(base_skin_dir, 'images', 'encrypted', '*.png')):
-    filepath = os.path.abspath(x) #specific path of image
-    filename = os.path.basename(x) #image file name
-    print(filename)
-    
-    #Get image matrix and its dimension
-    image_matrix = cv2.imread(filepath, cv2.IMREAD_UNCHANGED)
-    image_size = image_matrix.shape
+def decrypt(filepath, destination_path):
+    im_encrypted = i.Image(filepath, i.Type.ENCRYPTED, cv2.imread(filepath, cv2.IMREAD_UNCHANGED))
+    print(im_encrypted.filename)
     
     #begin undiffusion
-    undiffused_img = dif.pixelManipulation(image_matrix, image_size)
-    path = os.path.join('..', 'Source Code', 'images', 'undiffused')
-    newFilePath = path+"\\"+filename.split('.')[0]+".png"
-    cv2.imwrite(newFilePath, undiffused_img)
+    im_undiffused = i.Image( "E:\\KULIAH\\Skripsi\\Source Code\\images\\undiffused\\"+im_encrypted.filename.split('.')[0]+".png", i.Type.UNDIFFUSED, dif.pixelManipulation(im_encrypted))
+    cv2.imwrite(im_undiffused.filepath, im_undiffused.matrix)
 
     #begin unconfusion
-    unconfused_img = unc.pixelManipulation(undiffused_img, undiffused_img.shape)
-    path = os.path.join('..', 'Source Code', 'images', 'unconfused')
-    newFilePath = path+"\\"+filename.split('.')[0]+".png"
-    cv2.imwrite(newFilePath, unconfused_img)
+    im_unconfused = i.Image("E:\\KULIAH\\Skripsi\\Source Code\\images\\unconfused\\"+im_encrypted.filename.split('.')[0]+".png", i.Type.UNCONFUSED, unc.pixelManipulation(im_undiffused))
+    cv2.imwrite(im_unconfused.filepath, im_unconfused.matrix)
 
     #crop border
-    decrypted_image = res.cropBorder(unconfused_img, unconfused_img.shape)
-    path = os.path.join('..', 'Source Code', 'images', 'decrypted')
-    newFilePath = path+"\\"+filename.split('.')[0]+".png"
-    cv2.imwrite(newFilePath, decrypted_image)
+    im_decrypted = i.Image(destination_path+"\\"+im_encrypted.filename.split('.')[0]+".png", i.Type.DECRYPTED, res.cropBorder(im_unconfused))
+    cv2.imwrite(im_decrypted.filepath, im_decrypted.matrix)

@@ -4,14 +4,13 @@ import os
 import matplotlib.pyplot as plt
 import cv2
 
-def pixelManipulation(image_matrix, image_size):
-    [row, col, dim] = image_size
-    print("Image size:",image_size)
+def pixelManipulation(image):
+    [row, col, dim] = image.dimension
 
-    alpha = image_matrix[:,:,3]
+    alpha = image.matrix[:,:,3]
 
     #Generate Henon map using the image dimension
-    henon_map = gtm.generateHenonMap(image_size)
+    henon_map = gtm.generateHenonMap(image.dimension)
     print("Henon map size: ", henon_map.shape)
     
     resultant_matrix = []
@@ -20,7 +19,7 @@ def pixelManipulation(image_matrix, image_size):
     #Flatten the henon map and image matrix per channel
     henon_map_flatten = henon_map.flatten()
     for i in range(3):
-        image_matrix_rgb.append(image_matrix[:,:,i].flatten())
+        image_matrix_rgb.append(image.matrix[:,:,i].flatten())
     
     #Perform the XOR operation between the Henon Map and Image Matrix for each channel
     for i in range(3):
