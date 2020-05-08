@@ -1,10 +1,10 @@
 import numpy as np
 import cv2
 
-def generateHenonMap(image_size):
-    x = 0.293201174303193
-    y = 0.293201174303193
-    [row, col, dim] = image_size
+def generateHenonMap(image):
+    x = image.key.henon.x
+    y = image.key.henon.y
+    [row, col, dim] = image.dimension
     sequence_size = row * col * 8
     bit_sequence = [] #array contains 8 bits
     byte_array = []
@@ -43,9 +43,9 @@ def generateHenonMap(image_size):
 
 def generateArnoldMap(image):
     N = image.dimension[0]
-    p = 20
-    q = 10
-    iter = 2
+    p = image.key.arnold.p
+    q = image.key.arnold.q
+    iter = image.key.arnold.iter
     M = np.array(([1,p],[q,p*q+1]))
 
     arnold_map = np.zeros([N,N,4], np.uint8)
@@ -59,9 +59,9 @@ def generateArnoldMap(image):
 
 def reconstructArnoldMap(image):
     N = image.dimension[0]
-    p = 20
-    q = 10
-    iter = 2
+    p = image.key.arnold.p
+    q = image.key.arnold.q
+    iter = image.key.arnold.iter
     M = np.array(([1,p],[q,p*q+1]))
 
     arnold_map = np.zeros([N,N,4], np.uint8)

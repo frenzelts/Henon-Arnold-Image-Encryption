@@ -6,12 +6,12 @@ import cv2
 
 def pixelManipulation(image):
     [row, col, dim] = image.dimension
+    print("Begin diffusion...")
 
     alpha = image.matrix[:,:,3]
 
     #Generate Henon map using the image dimension
-    henon_map = gtm.generateHenonMap(image.dimension)
-    print("Henon map size: ", henon_map.shape)
+    henon_map = gtm.generateHenonMap(image)
     
     resultant_matrix = []
     image_matrix_rgb = []

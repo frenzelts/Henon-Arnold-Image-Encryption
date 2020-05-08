@@ -3,12 +3,13 @@ import os
 import cv2
 
 class Image:
-    def __init__(self, filepath, type, matrix):
+    def __init__(self, filepath, type, matrix, key):
         self.filepath = filepath
         self.filename = os.path.basename(filepath)
         self.type = type
         self.matrix = matrix
         self.dimension = self.matrix.shape
+        self.key = key
 
 class Type(Enum):
     ORIGINAL = 1

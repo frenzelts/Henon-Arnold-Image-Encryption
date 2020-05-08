@@ -7,6 +7,6 @@ def pixelManipulation(image):
 
     #Generate Arnold cat map
     arnold_map = gtm.generateArnoldMap(image)
-    print("Arnold map size: ", arnold_map.shape)
+    print("Begin confusion...")
 
     return arnold_map
