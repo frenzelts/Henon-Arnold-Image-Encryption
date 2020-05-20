@@ -19,4 +19,3 @@ class Type(Enum):
     UNDIFFUSED = 5
     UNCONFUSED = 6
     DECRYPTED = 7
-    

@@ -1,13 +1,14 @@
 import numpy as np
 import cv2
+import math
 
-def resize(image):
+def squareImage(image):
     [height, width, dimension] = image.dimension
     
     new_size = max(height, width)
     
     resized_img = np.zeros((new_size,new_size,4), np.uint8)
-    resized_img[:,:] = (255,255,255,0)
+    resized_img[:,:] = (255,255,255,254)
     
     x_offset = np.uint8((new_size-width)/2)
     y_offset = np.uint8((new_size-height)/2)
@@ -19,11 +20,15 @@ def resize(image):
     return resized_img 
 
 def cropBorder(image):
-    [height, width, dimension] = image.dimension
-    img_new = np.zeros([450,600,3])
+    [height_ol, width_ol, dimension] = image.dimension
+    height = (image.matrix[:,math.floor(width_ol/2),3] == 255).sum()
+    print(height)
+    width = (image.matrix[math.floor(height_ol/2),:,3] == 255).sum()
+    print(width)
+    img_new = np.zeros([height,width,3])
     for i in range(3):
         img_temp = image.matrix[:,:,[i,3]]
         img_temp = img_temp[img_temp[:,:,1] == 255]
-        img_new[:,:,i] = np.reshape(img_temp[:,0], [int(img_temp.shape[0]/600),600])
+        img_new[:,:,i] = np.reshape(img_temp[:,0], [height,width])
 
     return img_new

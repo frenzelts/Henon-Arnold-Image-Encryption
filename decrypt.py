@@ -2,8 +2,7 @@ import os
 import diffusion as dif
 from PIL import ImageTk, Image
 import confusion as con
-import unconfusion as unc
-import resize as res
+import reshape as res
 import cv2
 import Image as i
 
@@ -16,9 +15,9 @@ def decrypt(filepath, destination_path, key):
     cv2.imwrite(im_undiffused.filepath, im_undiffused.matrix)
 
     #begin unconfusion
-    im_unconfused = i.Image("E:\\KULIAH\\Skripsi\\Source Code\\images\\unconfused\\"+im_encrypted.filename.split('.')[0]+".png", i.Type.UNCONFUSED, unc.pixelManipulation(im_undiffused), key)
+    im_unconfused = i.Image("E:\\KULIAH\\Skripsi\\Source Code\\images\\unconfused\\"+im_encrypted.filename.split('.')[0]+".png", i.Type.UNCONFUSED, con.reconstructArnoldMap(im_undiffused), key)
     cv2.imwrite(im_unconfused.filepath, im_unconfused.matrix)
 
-    #crop border
+    #reshape crop border
     im_decrypted = i.Image(destination_path+"\\"+im_encrypted.filename.split('.')[0]+".png", i.Type.DECRYPTED, res.cropBorder(im_unconfused), key)
     cv2.imwrite(im_decrypted.filepath, im_decrypted.matrix)
