@@ -4,18 +4,20 @@ import cv2
 def generateArnoldMap(image):
     print("Begin confusion...")
     N = image.dimension[0]
+    # initial values
     p = image.key.arnold.p
     q = image.key.arnold.q
     iter = image.key.arnold.iter
-    M = np.array(([1,p],[q,p*q+1]))
-
-    arnold_map = np.zeros([N,N,4], np.uint8)
+    
+    # create x and y for pixel position
+    x,y = np.meshgrid(range(N),range(N))
+    # create meshgrid for new position
+    xmap = (x+y*p) % N
+    ymap = (x*q+y*(p*q+1)) % N
+    arnold_map = image.matrix
     for i in range(iter):
-        for y in range(N):
-            for x in range(N):
-                pixel_pos = np.array(([x],[y]))
-                [x1, y1] = np.mod(np.dot(M,pixel_pos),N)
-                arnold_map[x1,y1] = image.matrix[x,y]
+        arnold_map[xmap,ymap] = arnold_map[x,y]
+
     return arnold_map
 
 def reconstructArnoldMap(image):
@@ -24,13 +26,14 @@ def reconstructArnoldMap(image):
     p = image.key.arnold.p
     q = image.key.arnold.q
     iter = image.key.arnold.iter
-    M = np.array(([1,p],[q,p*q+1]))
 
-    arnold_map = np.zeros([N,N,4], np.uint8)
+    # create x and y for pixel position
+    x,y = np.meshgrid(range(N),range(N))
+    # create meshgrid for new position
+    xmap = (x+y*p) % N
+    ymap = (x*q+y*(p*q+1)) % N
+    arnold_map = image.matrix
     for i in range(iter):
-        for y in range(N):
-            for x in range(N):
-                pixel_pos = np.array(([x],[y]))
-                [x1, y1] = np.mod(np.dot(M,pixel_pos),N)
-                arnold_map[x,y] = image.matrix[x1,y1]
+        arnold_map[x,y] = arnold_map[xmap,ymap]
+
     return arnold_map

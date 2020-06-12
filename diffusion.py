@@ -2,6 +2,7 @@ import numpy as np
 import os
 import matplotlib.pyplot as plt
 import cv2
+import time
 
 def pixelManipulation(image):
     print("Begin diffusion...")
@@ -10,8 +11,12 @@ def pixelManipulation(image):
     alpha = image.matrix[:,:,3]
 
     #Generate Henon map using the image dimension
+    start_time = time.perf_counter()
     henon_map = generateHenonMap(image)
+    elapsed_time = time.perf_counter() - start_time
+    print(f"Elapsed time: {elapsed_time:0.4f} seconds")
     
+    start_time = time.perf_counter()
     resultant_matrix = []
     image_matrix_rgb = []
     
@@ -33,6 +38,8 @@ def pixelManipulation(image):
     resultant_matrix_g = np.reshape(resultant_matrix[1], [row,col])
     resultant_matrix_r = np.reshape(resultant_matrix[2], [row,col])
     resultant_matrix = np.dstack((resultant_matrix_b, resultant_matrix_g, resultant_matrix_r, alpha))
+    elapsed_time = time.perf_counter() - start_time
+    print(f"Elapsed time: {elapsed_time:0.4f} seconds")
 
     return resultant_matrix
 

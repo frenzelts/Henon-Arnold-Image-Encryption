@@ -1,43 +1,46 @@
 import secrets
 import math
 
-prime = 643528272942127
-generator = 21098140734109
+prime = 691701709719727733739743751757
+generator = 243658791110131217141915231629
 
 class Key:
     def __init__(self, private_key, public_key):
         self.prime = prime
         self.generator = generator
         self.private_key = int(private_key)
-        print(private_key)
         self.public_key = int(public_key)
-        print(public_key)
         self.shared_key = pow(self.public_key,self.private_key,self.prime)
         print(self.shared_key)
         self.henon = HenonInitial(self.shared_key)
         self.arnold = ArnoldInitial(self.shared_key)
 
+# initial values for henon map
 class HenonInitial:
     def __init__(self, k):
         k = str(k)
-        if len(k) > 15:
-            k = k[-15:]
-        self.x = float("0."+k[:math.floor(len(k)/2)])
-        self.y = float("0."+k[math.floor(len(k)/2):])
+        if len(k) > 28:
+            k = k[:28]
+        x = float("0."+k[:math.floor(len(k)/2)])
+        y = float("0."+k[math.floor(len(k)/2):])
         
+        self.x = max(x,y)
+        self.y = min(x,y)
         print(self.x)
         print(self.y)
 
+# initial values for arnold cat map
 class ArnoldInitial:
     def __init__(self, k):
-        k = str(k)
-        self.p = int(k[:2])
-        self.q = int(k[-2:])
-        self.iter = int(k[math.floor(len(k)/2)])
+        k = str(k)[-6:]
+        self.p = int(k[:3])
+        self.q = int(k[-3:])
+        self.iter = sum(int(digit) for digit in k)
         print(self.p)
         print(self.q)
         print(self.iter)
 
+# generate key pairs
 def genKeyPairs():
     pKey = secrets.randbits(53)
     pub = pow(generator,pKey,prime)

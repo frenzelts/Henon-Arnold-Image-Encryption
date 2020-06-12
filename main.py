@@ -101,9 +101,9 @@ class MainApplication:
             self.choose_entry.config(state=tk.DISABLED)
 
     def chooseDestination(self):
-        self.output_entry.delete(0, tk.END)
         path = fd.askdirectory(title='Select output destination')
         self.output_entry.config(state=tk.NORMAL)
+        self.output_entry.delete(0, tk.END)
         self.output_entry.insert(tk.INSERT, path)
         self.output_entry.config(state=tk.DISABLED)
 
