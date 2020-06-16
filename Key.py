@@ -23,7 +23,10 @@ class HenonInitial:
             k = k[:28]
         x = float("0."+k[:math.floor(len(k)/2)])
         y = float("0."+k[math.floor(len(k)/2):])
-        
+        if(x>0.97):
+            x=0.97-(x-0.97)
+        if(y>0.97):
+            y=0.97-(y-0.97)
         self.x = max(x,y)
         self.y = min(x,y)
         print(self.x)

@@ -5,6 +5,7 @@ import confusion as con
 import reshape as res
 import cv2
 import Image as i
+import time
 
 def decrypt(filepath, destination_path, key):
     im_encrypted = i.Image(filepath, i.Type.ENCRYPTED, cv2.imread(filepath, cv2.IMREAD_UNCHANGED), key)
