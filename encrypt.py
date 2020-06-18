@@ -28,7 +28,7 @@ def encrypt(filepath, destination_path, key):
     elapsed_time = time.perf_counter() - start_time
     print(f"Elapsed time: {elapsed_time:0.4f} seconds")
     #uncomment code below to save the output of confusion
-    cv2.imwrite(im_confused.filepath, im_confused.matrix)
+    # cv2.imwrite(im_confused.filepath, im_confused.matrix)
 
     #begin diffusion
     # start_time = time.perf_counter()

@@ -45,6 +45,6 @@ class ArnoldInitial:
 
 # generate key pairs
 def genKeyPairs():
-    pKey = secrets.randbits(53)
+    pKey = secrets.randbits(100)
     pub = pow(generator,pKey,prime)
     return pKey, pub
