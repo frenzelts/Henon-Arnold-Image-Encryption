@@ -164,7 +164,7 @@ class LoginApp:
         self.app = app
         self.app.geometry('%sx%s' % (int(self.app.winfo_screenwidth()/4), int(app.winfo_screenheight()/3)))
         self.app.resizable(width=False, height=False)
-
+        self.app.title("Login - SKRIPSI FRENZEL")
         self.frame = tk.Frame(self.app)
 
         self.login_label = tk.Label(self.frame, text="Login with private key", font=('Helvetica', 10, 'bold'))
