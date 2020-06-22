@@ -115,7 +115,7 @@ class MainApplication:
             self.showBar(i, listFilenames.index(i), len(listFilenames))
             if self.selection_value.get() == 1:
                 e.encrypt(i, self.output_entry.get(), key)
-            else:
+            if self.selection_value.get() == 2:
                 d.decrypt(i, self.output_entry.get(), key)
         self.progressText.set(self.encrypt_text.get()+"ion finished. ("+str(len(listFilenames))+"/"+str(len(listFilenames))+")")
         self.clearAllText()
