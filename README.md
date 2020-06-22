@@ -14,7 +14,7 @@ This encryption method needs a shared secret key for the Henon map and Arnold ca
 
 ## How to decrypt 
 - Run **main.py**
-- Login with **your public key**
+- Login with **your private key**
 - Select **decrypt** mode
 - Add images to be decrypted
 - Select output destination path
