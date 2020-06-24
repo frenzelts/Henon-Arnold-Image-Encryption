@@ -27,10 +27,7 @@ def pixelManipulation(image):
     
     #Perform the XOR operation between the Henon Map and Image Matrix for each channel
     for i in range(3):
-        resultant_matrix_per_channel = []
-        for j in range(henon_map_flatten.size):
-            resultant_matrix_per_channel.append(henon_map_flatten[j] ^ image_matrix_rgb[i][j])
-        resultant_matrix.append(resultant_matrix_per_channel) 
+        resultant_matrix.append(np.bitwise_xor(henon_map_flatten, image_matrix_rgb[i])) 
     resultant_matrix = np.asarray(resultant_matrix)
 
     #Reconstruct the image matrix to its original shape
