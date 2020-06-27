@@ -28,7 +28,7 @@ Login UI                   |  Encryption UI
 
 ## Key to Initial Values Algorithm
 <p align="center">
-  <img src="https://github.com/frenzelts/Henon-Arnold-Image-Encryption/blob/master/Flow-Key-to-Initial-Values.png">
+  <img src="https://github.com/frenzelts/Henon-Arnold-Image-Encryption/blob/master/Flow-Initial-Values-Generation.png">
 </p>
 
 ## Encryption/Decryption Flow
