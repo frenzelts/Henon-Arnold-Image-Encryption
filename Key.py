@@ -35,14 +35,17 @@ class HenonInitial:
 # initial values for arnold cat map
 class ArnoldInitial:
     def __init__(self, k):
-        k = str(k)[-6:]
-        self.p = int(k[:3])
-        self.q = int(k[-3:])
-        self.iter = sum(int(digit) for digit in k)
+        k = str(k)
+        k_iter = k[-6:]
+        self.iter = sum(int(digit) for digit in k_iter)
+
+        self.p = k[:math.floor(len(k)/2)]
+        self.q = k[math.floor(len(k)/2):]
+        
         print(self.p)
         print(self.q)
         print(self.iter)
-
+        
 # generate key pairs
 def genKeyPairs():
     pKey = secrets.randbits(100)
