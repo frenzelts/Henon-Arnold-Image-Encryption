@@ -33,7 +33,7 @@ Login UI                   |  Encryption UI
 
 ## Encryption/Decryption Flow
 <p align="center">
-  <img src="https://github.com/frenzelts/Henon-Arnold-Image-Encryption/blob/master/Flow-Encryption-Decryption.png">
+  <img src="https://github.com/frenzelts/Henon-Arnold-Image-Encryption/blob/master/Flow-Encryption-and-Decryption.png">
 </p>
 
 

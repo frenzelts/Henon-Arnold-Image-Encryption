@@ -7,8 +7,10 @@ def squareImage(image):
     [height, width, dimension] = image.dimension
     
     new_size = max(height, width)
-    resized_img = np.empty((new_size,new_size,4), np.uint8)
-    resized_img[:,:] = (255,255,255,254)
+    # resized_img = np.empty((new_size,new_size,4), np.uint8)
+    # resized_img[:,:] = (255,255,255,254)
+    resized_img = np.uint8(np.random.randint(0, 255, size=(new_size, new_size, 4)))
+    resized_img[:,:,3] = 254
     
     x_offset = math.floor((new_size-width)/2)
     y_offset = math.floor((new_size-height)/2)
