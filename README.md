@@ -2,8 +2,14 @@
 Chaos-based image encryption for RGB images using combination of Henon map and Arnold cat map as the chaotic maps.
 This encryption method needs a shared secret key for the Henon map and Arnold cat map parameters/initial values, which involves Diffie-Hellman algorithm for the key generation.
 
+## Dependencies Installation
+- Make sure you have Python and PIP installed
+- Install Numpy (pip install numpy)
+- Install OpenCV (pip install opencv-python)
+- Install TkInter (pip install tk)
+
 ## How to encrypt
-- Run **main.py**
+- Run **main.py** (python main.py)
 - If you don't have the key pairs, **Generate new key pairs**
 - Login with the generated private key
 - Select **encrypt** mode
@@ -13,7 +19,7 @@ This encryption method needs a shared secret key for the Henon map and Arnold ca
 - Encrypt
 
 ## How to decrypt 
-- Run **main.py**
+- Run **main.py** (python main.py)
 - Login with **your private key**
 - Select **decrypt** mode
 - Add images to be decrypted

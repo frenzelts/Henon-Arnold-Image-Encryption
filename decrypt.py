@@ -1,6 +1,5 @@
 import os
 import diffusion as dif
-from PIL import ImageTk, Image
 import confusion as con
 import reshape as res
 import cv2
